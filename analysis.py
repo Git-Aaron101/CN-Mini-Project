@@ -3,34 +3,17 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv("log.csv")
 
-avg_speed = df["Speed(Mbps)"].mean()
-min_speed = df["Speed(Mbps)"].min()
-max_speed = df["Speed(Mbps)"].max()
-std_dev = df["Speed(Mbps)"].std()
-
-busiest_hour = df.loc[df["Speed(Mbps)"].idxmin(), "Hour"]
-
-total_packets = df["Packets"].sum()
-
 print("\n===== LOG TABLE =====\n")
 print(df.to_string(index=False))
 
-print("\n===== ANALYSIS =====\n")
-print("Average Speed:", round(avg_speed, 2))
-print("Min Speed:", round(min_speed, 2))
-print("Max Speed:", round(max_speed, 2))
-print("Std Dev:", round(std_dev, 2))
-print("Total Packets:", int(total_packets))
-print("Busiest Hour:", busiest_hour)
+print("\nAverage Speed:", df["Speed(Mbps)"].mean())
+print("Min Speed:", df["Speed(Mbps)"].min())
+print("Max Speed:", df["Speed(Mbps)"].max())
+print("Busiest Hour:", df.loc[df["Speed(Mbps)"].idxmin(), "Hour"])
 
-plt.plot(df["Hour"], df["Speed(Mbps)"], marker='o', label="Speed")
-plt.axhline(avg_speed, linestyle='--', label="Average")
-
+plt.plot(df["Hour"], df["Speed(Mbps)"], marker='o')
 plt.xlabel("Hour")
-plt.ylabel("Speed (Mbps)")
-plt.title("Network Analysis with Packet Details")
-
-plt.legend()
+plt.ylabel("Speed")
+plt.title("Network Performance")
 plt.grid()
-
 plt.show()

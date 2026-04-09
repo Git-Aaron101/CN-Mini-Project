@@ -6,9 +6,9 @@ with open("log.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Hour", "Size(Bytes)", "Time(s)", "Speed(Mbps)", "Packets"])
 
-print("Simulating 24 hours...\n")
+print("Simulating downloads...\n")
 
-for i in range(24):
+for i in range(5):   # keep 5 for demo
     hour = i + 1
 
     size, time_taken, speed, packets = download_file()
@@ -19,16 +19,6 @@ for i in range(24):
         writer = csv.writer(f)
         writer.writerow([hour, size, time_taken, speed, packets])
 
-    time.sleep(1)  # 1 sec = 1 hour
+    time.sleep(1)
 
 print("Logging complete")
-
-
-
-
-
-
-
-
-
-
