@@ -2,29 +2,33 @@ import csv
 import time
 from downloader import download_file
 
-# create CSV with header
 with open("log.csv", "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(["Hour", "Size", "Time", "Speed"])
+    writer.writerow(["Hour", "Size(Bytes)", "Time(s)", "Speed(Mbps)", "Packets"])
 
-print("Starting simulated 24-hour download...\n")
+print("Simulating 24 hours...\n")
 
-# simulate 24 hours
 for i in range(24):
     hour = i + 1
 
-    print(f"Running Hour {hour}...")
+    size, time_taken, speed, packets = download_file()
 
-    size, time_taken, speed = download_file()
+    print(f"Hour {hour}: {round(speed,2)} Mbps")
 
-    print(f"Hour {hour}: {round(speed, 2)} Mbps\n")
-
-    # save data
     with open("log.csv", "a", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow([hour, size, time_taken, speed])
+        writer.writerow([hour, size, time_taken, speed, packets])
 
-    # simulate 1 hour → using 1 second delay
-    time.sleep(1)
+    time.sleep(1)  # 1 sec = 1 hour
 
-print("Simulation complete. Data saved to log.csv")
+print("Logging complete")
+
+
+
+
+
+
+
+
+
+
